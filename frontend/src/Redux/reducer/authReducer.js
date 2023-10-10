@@ -2,7 +2,8 @@ import { SIGNUP, LOGIN } from '../constants/actionTypes';
 
 const initialState = {
   users: JSON.parse(localStorage.getItem('users')) || [],
-  currentUser: null
+  currentUser: null,
+  loginError: null  // Add a login error state
 };
 
 const authReducer = (state = initialState, action) => {
@@ -21,11 +22,16 @@ const authReducer = (state = initialState, action) => {
       if (userFound) {
         return {
           ...state,
-          currentUser: userFound
+          currentUser: userFound,
+          loginError: null  // Reset login error on successful login
         };
       } else {
         console.error('Login failed: Invalid credentials');
-        return state;
+        return {
+          ...state,
+          currentUser: null,
+          loginError: 'Invalid credentials. Please try again.' // Set login error
+        };
       }
     default:
       return state;

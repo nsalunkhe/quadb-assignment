@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../Redux/actions/authActions';
 import { useNavigate } from 'react-router-dom';
@@ -10,25 +10,28 @@ const Login = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loginAttempted, setLoginAttempted] = useState(false);
 
   const handleLogin = () => {
     const user = { username, password };
+    setLoginAttempted(true);
     dispatch(login(user));
   };
 
   const auth = useSelector((state) => state.auth);
   const { currentUser, loginError } = auth;
 
-  // Handle login success or failure
-  React.useEffect(() => {
-    if (currentUser) {
-      alert('Login Successful!');
-      navigate('/user');
+  useEffect(() => {
+    if (loginAttempted) {
+      if (currentUser) {
+        alert('Login Successful!');
+        navigate('/user');
+      } else if (loginError) {
+        alert('Login Failed. Invalid credentials.');
+      }
+      setLoginAttempted(false); // Reset login attempt status
     }
-    if (loginError) {
-      alert('Login Failed. Invalid credentials.');
-    }
-  }, [currentUser, loginError, navigate]);
+  }, [loginAttempted, currentUser, loginError, navigate]);
 
   return (
     <div className="login-container">
