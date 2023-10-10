@@ -91,7 +91,8 @@ Form for details
 
 Application Details With Resume 
 
-![Quadb-Details](https://github.com/nsalunkhe/quadb-assignment/assets/101391587/f0516940-22cd-45ba-95df-b61cb728a754)
+![image (35)](https://github.com/nsalunkhe/quadb-assignment/assets/101391587/0701b4f6-d87f-47be-a92f-279ecff3d449)
+
 
 
 
