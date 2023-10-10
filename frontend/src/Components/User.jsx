@@ -26,6 +26,9 @@ const User = () => {
       navigate(`/info/${selectedJob.id}`);
     }
   };
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,6 +84,7 @@ const User = () => {
       {modalOpen && selectedJob && (
         <div className="job-info-modal">
           <div className="modal-content">
+          <button className="close-button" onClick={handleCloseModal}>✖</button>
             <h2>{selectedJob.job_title}</h2>
             <p><strong>Company:</strong> {selectedJob.company_name}</p>
             <p><strong>Experience Needed:</strong> {selectedJob.experience}</p>
